@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { ShieldCheck, Loader2, Lock } from "lucide-react";
+import { ShieldCheck, Loader2, Lock, ArrowLeft } from "lucide-react"; // Import ArrowLeft
+import Link from "next/link"; // Import Link for navigation
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState("");
@@ -44,6 +45,15 @@ export default function AdminLoginPage() {
         <div className="absolute top-0 left-0 w-full h-1/2 bg-neutral-900" />
         <div className="absolute bottom-0 left-0 w-full h-1/2 bg-neutral-100" />
       </div>
+
+      {/* NEW: Back to Home Button (Top Left) */}
+      <Link 
+        href="/" 
+        className="absolute top-6 left-6 z-20 flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-sm font-medium hover:bg-white/20 transition-all group"
+      >
+        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+        Back to Home
+      </Link>
 
       <div className="relative z-10 w-full max-w-md px-4">
         {/* Card Container */}
@@ -118,10 +128,18 @@ export default function AdminLoginPage() {
               </button>
             </form>
             
-            <div className="mt-8 text-center">
+            <div className="mt-8 text-center space-y-4">
               <p className="text-xs text-neutral-400">
                 Authorized personnel only. <br/> Access is monitored and logged.
               </p>
+
+              {/* NEW: Secondary Link inside the card */}
+              <Link 
+                href="/"
+                className="inline-flex items-center text-xs font-medium text-neutral-500 hover:text-neutral-900 transition-colors"
+              >
+                ← Return to main site
+              </Link>
             </div>
           </div>
         </div>
