@@ -1,0 +1,44 @@
+// veritas-website\lib\auth\audit.ts
+
+import { prisma } from "@/db/client";
+import { AdminAction, AdminRole } from "@prisma/client";
+
+export async function logAdminAction({
+  action,
+  actorId,
+  targetId,
+  oldRole,
+  newRole,
+}: {
+  action: AdminAction;
+  actorId: string;
+  targetId: string;
+  oldRole?: AdminRole | null;
+  newRole?: AdminRole | null;
+}) {
+  await prisma.adminAuditLog.create({
+    data: {
+      action,
+      actorId,
+      targetId,
+      oldRole,
+      newRole,
+    },
+  });
+}
+
+import { prisma } from "@/db/client";
+
+export async function cleanupOldAdminLogs() {
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - 30);
+
+  await prisma.adminAuditLog.deleteMany({
+    where: {
+      createdAt: {
+        lt: cutoff,
+      },
+    },
+  });
+}
+

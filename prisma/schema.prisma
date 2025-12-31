@@ -1,0 +1,143 @@
+generator client {
+  provider        = "prisma-client-js"
+  engineType      = "node"
+}
+
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AdminUser {
+  id           String      @id @default(uuid())
+  name         String
+  email        String      @unique
+  passwordHash String 
+  role         AdminRole
+  department   Department?
+  isApproved   Boolean     @default(false)
+  isFounder    Boolean     @default(false)
+  createdAt    DateTime    @default(now())
+
+  sessions AdminSession[]
+  events   Event[]
+}
+
+model Event {
+  id               String      @id @default(uuid())
+  name             String
+  description      String
+  type             EventType
+  status           EventStatus
+  access           EventAccess
+  venue            String
+
+  date             DateTime
+  time             String 
+
+  meetLink         String?
+  registrationLink String?
+  eventDocLink     String?
+  coverImageLink   String?
+
+  createdById String
+  createdBy   AdminUser @relation(fields: [createdById], references: [id])
+
+  createdAt DateTime @default(now())
+
+  contents Content[]
+}
+
+
+model Content {
+  id           String      @id @default(uuid())
+  title        String
+  body         String
+  type         ContentType
+  published    Boolean     @default(false)
+  moreInfoLink String?
+  createdAt    DateTime    @default(now())
+
+  eventId String?
+  event   Event?  @relation(fields: [eventId], references: [id])
+}
+
+model TeamMember {
+  id           String      @id @default(uuid())
+  name         String
+  role         String
+  email        String
+  imageLink    String?
+  linkedinLink String?
+  department   Department?
+  orderIndex   Int
+}
+
+model VeritasDigest {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  volume      Int
+  issue       Int
+  link        String
+  month       String
+  createdAt   DateTime @default(now())
+}
+
+model SiteStats {
+  id                 String   @id @default(uuid())
+  societyMemberCount Int
+  updatedAt          DateTime @updatedAt
+}
+
+model AdminSession {
+  id      String    @id @default(uuid())
+  adminId String
+  admin   AdminUser @relation(fields: [adminId], references: [id], onDelete: Cascade)
+
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+enum AdminRole {
+  SUPER_ADMIN
+  DEPARTMENT_ADMIN
+  CONTENT_ADMIN
+}
+
+enum Department {
+  EVENTS
+  RESEARCH
+  WEBOPS
+  CREATIVE
+  PR
+}
+
+enum EventStatus {
+  UPCOMING
+  CURRENT
+  LIVE
+  COMPLETED
+}
+
+enum EventType {
+  DISCUSSION
+  DEBATE
+  OFF_THE_BEAT
+  GROUP_DISCUSSION
+  STORYTELLING
+  WORKSHOP
+  OTHER
+}
+
+enum EventAccess {
+  REGISTRATION
+  OPEN
+  TBD
+}
+
+enum ContentType {
+  SPEECH
+  ARTICLE
+  RESEARCH
+}
