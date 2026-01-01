@@ -6,8 +6,9 @@ import { getCurrentAdmin } from "@/lib/auth/admin";
 import { listEvents, createEvent } from "@/lib/events/admin";
 import { canCreateEvent } from "@/lib/auth/permissions";
 import { EventAccess, EventStatus, EventType } from "@prisma/client";
-// Revalidation path implemented to update public static event listings after admin changes
-import { revalidatePublic } from "@/lib/revalidate";
+// // Revalidation path implemented to update public static event listings after admin changes
+// import { revalidatePublic } from "@/lib/revalidate";
+import { revalidatePath } from "next/cache"; // 👈 DIRECT IMPORT
 
 export async function GET() {
   const admin = await getCurrentAdmin();
@@ -51,10 +52,11 @@ export async function POST(req: Request) {
     createdById: admin.id,
   });
 
-  // Revalidate public pages
-  await revalidatePublic([
-    "/events",
-  ]);
+  // // Revalidate public pages
+  // await revalidatePublic([
+  //   "/events",
+  // ]);
+  revalidatePath("/events");
 
 
   return NextResponse.json(event);
