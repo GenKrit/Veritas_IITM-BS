@@ -17,9 +17,13 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "paths must be an array" }, { status: 400 });
     }
 
+    // for (const path of paths) {
+    //   revalidatePath(path);
+    // }
     for (const path of paths) {
-      revalidatePath(path);
+      revalidatePath(path, "page");
     }
+    
 
     return NextResponse.json({ revalidated: true, paths });
   } catch {
