@@ -6,7 +6,7 @@ import { canAccessVSD } from "@/lib/auth/permissions";
 import { NextResponse } from "next/server";
 
 // Revalidation path implemented to update public static event listings after admin changes
-import { revalidatePublic } from "@/lib/revalidate";
+import { revalidatePath } from "next/cache";
 
 
 export async function POST(req: Request) {
@@ -20,8 +20,7 @@ export async function POST(req: Request) {
   await prisma.veritasDigest.create({ data });
 
   // Revalidate public pages
-  await revalidatePublic([
-    "/vsd",
-  ]);
+  revalidatePath("/vsd");
+
   return NextResponse.json({ success: true });
 }

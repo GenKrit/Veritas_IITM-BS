@@ -3,9 +3,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/db/client";
 import { getCurrentAdmin } from "@/lib/auth/admin";
 import { canApproveAdmins } from "@/lib/auth/permissions";
-// // Revalidation path implemented to update public static event listings after admin changes
-// import { revalidatePublic } from "@/lib/revalidate";
-
+// // Revalidation path implemented to update public static event listings after admin changes to be implemented
+// import { revalidatePath } from "next/cache";
 
 export async function POST(req: Request) {
   try {
@@ -22,10 +21,8 @@ export async function POST(req: Request) {
       create: { societyMemberCount },
     });
 
-    // // Revalidate public VSD page
-    // await revalidatePublic([
-    //   "/", //directory where stats is added and validated
-    // ]);
+    // // REVALIDATION when needed in future
+    // revalidatePath("/events"); 
 
     return NextResponse.json({ success: true, stats });
   } catch (error) {

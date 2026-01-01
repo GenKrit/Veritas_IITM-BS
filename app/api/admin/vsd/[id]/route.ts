@@ -4,7 +4,7 @@ import { getCurrentAdmin } from "@/lib/auth/admin";
 import { canAccessVSD } from "@/lib/auth/permissions";
 import { NextResponse } from "next/server";
 // Revalidation path implemented to update public static event listings after admin changes
-import { revalidatePublic } from "@/lib/revalidate";
+import { revalidatePath } from "next/cache";
 
 
 export async function DELETE(
@@ -24,9 +24,8 @@ export async function DELETE(
     });
 
     // Revalidate public VSD page
-    await revalidatePublic([
-      "/vsd",
-    ]);
+    revalidatePath("/vsd");
+
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -60,9 +59,7 @@ export async function PATCH(
     });
 
     // Revalidate public VSD page
-    await revalidatePublic([
-      "/vsd",
-    ]);
+    revalidatePath("/vsd");
 
     return NextResponse.json({ success: true });
   } catch (error) {

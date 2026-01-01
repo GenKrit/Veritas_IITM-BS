@@ -5,7 +5,7 @@ import { requireAdmin } from "@/lib/auth/requireAdmin";
 import { canManageTeam } from "@/lib/auth/permissions";
 import { Department } from "@prisma/client";
 // Revalidation path implemented to update public static event listings after admin changes
-import { revalidatePublic } from "@/lib/revalidate";
+import { revalidatePath } from "next/cache";
 
 type TeamMemberInput = {
   id: string;
@@ -97,9 +97,7 @@ export async function POST(req: Request) {
     });
 
     // Revalidate public team page
-    await revalidatePublic([
-      "/team",
-    ]);
+    revalidatePath("/team");
 
     return NextResponse.json({ success: true });
   } catch (err) {
