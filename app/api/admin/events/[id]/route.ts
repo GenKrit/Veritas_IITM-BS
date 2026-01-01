@@ -9,6 +9,9 @@ import {
 } from "@/lib/events/admin";
 import { canEditEvent, canDeleteEvent } from "@/lib/auth/permissions";
 
+// Revalidation path implemented to update public static event listings after admin changes
+import { revalidatePublic } from "@/lib/revalidate";
+
 export async function GET(
   _req: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -50,6 +53,13 @@ export async function PATCH(
     date: body.date ? new Date(body.date) : undefined,
   });
 
+  // Revalidate public pages
+  await revalidatePublic([
+    "/events",
+    `/events/${id}`,
+  ]);
+
+
   return NextResponse.json(updated);
 }
 
@@ -74,5 +84,11 @@ export async function DELETE(
   }
 
   await deleteEvent(id);
+
+  // Revalidate public pages after delete
+  await revalidatePublic([
+    "/events",
+    `/events/${id}`,
+  ]);
   return NextResponse.json({ success: true });
 }

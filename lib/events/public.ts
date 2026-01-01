@@ -10,6 +10,7 @@
 //   });
 // }
 
+// veritas-website/lib/events/public.ts
 import { prisma } from "@/db/client";
 
 export async function listPublicEvents() {
@@ -21,9 +22,9 @@ export async function listPublicEvents() {
 
   // Define status priority for same-date events: UPCOMING > CURRENT > LIVE > COMPLETED
   const statusPriority = {
-    UPCOMING: 1,
-    CURRENT: 2,
-    LIVE: 3,
+    UPCOMING: 2,
+    CURRENT: 3,
+    LIVE: 1,
     COMPLETED: 4,
   };
 

@@ -1,4 +1,4 @@
-// D:\IITM\1-VERITAS\Veitas_IITM-web\veritas-website\app\api\admin\events\route.ts
+// Veitas_IITM-web\veritas-website\app\api\admin\events\route.ts
 
 
 import { NextResponse } from "next/server";
@@ -6,6 +6,8 @@ import { getCurrentAdmin } from "@/lib/auth/admin";
 import { listEvents, createEvent } from "@/lib/events/admin";
 import { canCreateEvent } from "@/lib/auth/permissions";
 import { EventAccess, EventStatus, EventType } from "@prisma/client";
+// Revalidation path implemented to update public static event listings after admin changes
+import { revalidatePublic } from "@/lib/revalidate";
 
 export async function GET() {
   const admin = await getCurrentAdmin();
@@ -48,6 +50,12 @@ export async function POST(req: Request) {
 
     createdById: admin.id,
   });
+
+  // Revalidate public pages
+  await revalidatePublic([
+    "/events",
+  ]);
+
 
   return NextResponse.json(event);
 }

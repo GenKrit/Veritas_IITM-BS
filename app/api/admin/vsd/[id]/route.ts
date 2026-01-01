@@ -3,6 +3,9 @@ import { prisma } from "@/db/client";
 import { getCurrentAdmin } from "@/lib/auth/admin";
 import { canAccessVSD } from "@/lib/auth/permissions";
 import { NextResponse } from "next/server";
+// Revalidation path implemented to update public static event listings after admin changes
+import { revalidatePublic } from "@/lib/revalidate";
+
 
 export async function DELETE(
   _req: Request,
@@ -19,6 +22,11 @@ export async function DELETE(
     await prisma.veritasDigest.delete({
       where: { id },
     });
+
+    // Revalidate public VSD page
+    await revalidatePublic([
+      "/vsd",
+    ]);
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -50,6 +58,11 @@ export async function PATCH(
         link: data.link,
       },
     });
+
+    // Revalidate public VSD page
+    await revalidatePublic([
+      "/vsd",
+    ]);
 
     return NextResponse.json({ success: true });
   } catch (error) {

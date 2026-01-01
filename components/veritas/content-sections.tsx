@@ -128,7 +128,7 @@ export const AboutCovenant = () => (
 export const StatsSection = () => (
   <section className="py-32 bg-gradient-to-b from-amber-50/50 to-white/70 relative">
     <div className="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-16 text-center">
-      {[ { value: "700", label: "Members", suffix: "+" }, { value: "70+", label: "Events", suffix: "+" }, { value: "5", label: "Teams", suffix: "+" }, { value: "18", label: "Team Members", suffix: "" } ].map((stat, i) => (
+      {[ { value: "700", label: "Members", suffix: "+" }, { value: "70", label: "Events", suffix: "+" }, { value: "5", label: "Teams", suffix: "+" }, { value: "18", label: "Team Members", suffix: "" } ].map((stat, i) => (
         <RevealText key={i} delay={i * 0.2}>
           <motion.div className="group" whileHover={{ scale: 1.1, y: -10 }}>
             <div className="text-7xl md:text-[8rem] font-serif font-black text-transparent bg-clip-text bg-gradient-to-br from-amber-900 to-amber-700 mb-6 drop-shadow-2xl">{stat.value}<span className="text-5xl">{stat.suffix}</span></div>

@@ -212,10 +212,21 @@
 
 import { redirect } from "next/navigation";
 import { getEventById } from "@/lib/events/admin";
+import { listPublicEvents } from "@/lib/events/public";
 import MagneticCursor from "@/components/effects/MagneticCursor";
 import ParchmentBackground from "@/components/effects/ParchmentBackground";
 import Navbar from "@/components/navbar/Navbar";
 import EventDetailsClient from "@/components/veritas/events/event-details-ui"; // Import client component
+
+
+// to keep ISR off for this page until revalidated by admin actions
+export async function generateStaticParams() {
+  const events = await listPublicEvents();
+
+  return events.map((event) => ({
+    id: event.id,
+  }));
+}
 
 export default async function PublicEventDetails({
   params,
