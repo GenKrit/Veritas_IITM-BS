@@ -140,7 +140,11 @@ export const metadata = {
 export default function PublicContentPage() {
   return (
     <main className="min-h-screen bg-[#fdfcf8] selection:bg-[#bc6c25] selection:text-white relative">
-      <MagneticCursor />
+      
+      <div className="hidden md:block">
+        <MagneticCursor />
+      </div>
+      
       <ParchmentBackground />
       <Navbar />
 

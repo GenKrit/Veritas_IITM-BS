@@ -26,7 +26,7 @@ useEffect(() => {
   const handler = function (this: HTMLAnchorElement, e: Event) {
     const targetAttr = this.getAttribute("href");
     
-    // ✅ Safety check: only handle actual hash links
+    // Safety check: only handle actual hash links
     if (!targetAttr?.startsWith("#")) {
       return; // Let Next.js handle /events routes normally
     }
@@ -143,7 +143,11 @@ useEffect(() => {
           -webkit-backface-visibility: hidden;
         }
       `}</style>
-      <MagneticCursor />
+      
+      <div className="hidden md:block">
+        <MagneticCursor />
+      </div>
+
       <ParchmentBackground />
       <Navbar />
 

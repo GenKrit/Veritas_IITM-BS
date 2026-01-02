@@ -97,9 +97,9 @@ if (isMobile) {
     <>
       {/* Mobile Top Bar: Hamburger Left + Logo Right */}
       <div className="fixed top-6 left-6 right-6 z-1001 flex items-center justify-between">
-        {/* Hamburger Button - LEFT - ✅ FIXED LOGIC */}
+        {/* Hamburger Button - LEFT  */}
         <motion.button
-          onClick={() => setMobileMenuOpen(prev => !prev)} // ✅ Toggle logic
+          onClick={() => setMobileMenuOpen(prev => !prev)} // Toggle logic
           className="p-3 bg-white/90 backdrop-blur-xl rounded-2xl border border-amber-200/50 shadow-xl hover:shadow-amber-900/20 transition-all"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -123,7 +123,7 @@ if (isMobile) {
         </Link>
       </div>
 
-      {/* Mobile Full-Screen Menu - ✅ FIXED BOUNDS */}
+      {/* Mobile Full-Screen Menu -  FIXED BOUNDS */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -155,7 +155,7 @@ if (isMobile) {
                 </div>
               </motion.div>
 
-              {/* Nav Items - ✅ Responsive spacing */}
+              {/* Nav Items - Responsive spacing */}
               <div className="flex-1 flex flex-col items-center justify-center gap-4 sm:gap-6 max-w-md w-full px-4">
                 {navItems.map((item, index) => {
                   const Icon = item.icon;
@@ -186,7 +186,7 @@ if (isMobile) {
                 })}
               </div>
 
-              {/* Admin Button - ✅ Responsive */}
+              {/* Admin Button - Responsive */}
               <motion.div 
                 initial={{ y: 30, opacity: 0 }} 
                 animate={{ y: 0, opacity: 1 }} 

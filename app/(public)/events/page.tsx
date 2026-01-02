@@ -161,7 +161,10 @@ export default async function PublicEventsPage() {
 
   return (
     <main className="min-h-screen bg-[#fdfcf8] selection:bg-[#bc6c25] selection:text-white">
-      <MagneticCursor />
+      <div className="hidden md:block">
+        <MagneticCursor />
+      </div>
+
       <ParchmentBackground />
       <Navbar />
       
