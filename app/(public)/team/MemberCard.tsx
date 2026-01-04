@@ -143,20 +143,21 @@ export default function MemberCard({ member, highlight = false }: Props) {
         <div className="absolute inset-0 bg-linear-to-t from-[#2a1c0f]/90 via-transparent to-transparent opacity-80" />
 
         {/* LinkedIn "Stamp" */}
-{member.linkedinLink && (
-  <a
-    href={getValidUrl(member.linkedinLink)} // === 2. USE HELPER HERE ===
-    target="_blank"
-    rel="noopener noreferrer"
-    className="absolute top-4 right-4 px-3 py-2 bg-white/40 backdrop-blur-md rounded-full border 
-    border-blue-500/90 opacity-0 group-hover:opacity-100 transition-all duration-500 
-    hover:bg-[#0077b5] hover:border-transparent hover:scale-110 flex items-center gap-2"
-    aria-label="LinkedIn Profile"
-  >
-    <span className="text-neutral-700 text-xs font-medium uppercase tracking-wider">Contact</span>
-    <Linkedin size={16} className="text-blue-400" />
-  </a>
-)}
+        {member.linkedinLink && (
+         <a
+           href={getValidUrl(member.linkedinLink)} // USED HELPER HERE 
+           target="_blank"
+           rel="noopener noreferrer"
+           className="absolute top-4 right-4 px-3 py-2 bg-white/40 backdrop-blur-md rounded-full border 
+            border-blue-500/90 transition-all duration-500 flex items-center gap-2
+            opacity-100 lg:opacity-0 lg:group-hover:opacity-100 
+            hover:bg-[#0077b5] hover:border-transparent hover:scale-110"
+            aria-label="LinkedIn Profile"
+         >
+           <span className="text-neutral-700 text-xs font-medium uppercase tracking-wider">Contact</span>
+           <Linkedin size={16} className="text-blue-400" />
+         </a>
+       )}
 
 
         {/* Role Badge (Over Image) */}
