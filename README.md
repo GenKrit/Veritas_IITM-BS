@@ -4,7 +4,7 @@ A full-stack, role-based web platform built for Veritas Society, designed to man
 
 This project focuses on real-world system design, secure authentication, role-based authorization, and scalable content management, rather than demo-only features.
 
-##🌐 Overview
+## 🌐 Overview
 
 Veritas Society is a discussion- and discourse-focused academic society.
 This platform serves two purposes:
@@ -23,7 +23,7 @@ This platform serves two purposes:
 
 - Secure, server-validated actions
 
-##✨ Core Features
+## ✨ Core Features
 1.Public Side
 
 - Public Events listing with full event details
@@ -52,11 +52,11 @@ This platform serves two purposes:
 
 - Protected API routes (server-side permission checks)
 
-##👥 Admin Roles & Permissions
+## 👥 Admin Roles & Permissions
 
 The system uses strict role-based authorization, enforced on the server, not the UI.
 
-###Roles
+### Roles
 🛡️ SUPER_ADMIN
 
 - Full system access
@@ -69,7 +69,7 @@ The system uses strict role-based authorization, enforced on the server, not the
 
 - Override permissions where required
 
-###🏢 DEPARTMENT_ADMIN
+### 🏢 DEPARTMENT_ADMIN
 
 - Manage events
 
@@ -77,7 +77,7 @@ The system uses strict role-based authorization, enforced on the server, not the
 
 - Cannot manage admins
 
-###✍️ CONTENT_ADMIN
+### ✍️ CONTENT_ADMIN
 
 - Manage Veritas Speaking Digest (VSD)
 
@@ -88,7 +88,7 @@ The system uses strict role-based authorization, enforced on the server, not the
 ⚠️ Permissions are enforced in backend APIs.
 UI restrictions are not trusted as security boundaries.
 
-##🔐 Authentication & Security Design
+## 🔐 Authentication & Security Design
 
 - Server-side session authentication (cookie-based)
 
@@ -110,8 +110,8 @@ UI restrictions are not trusted as security boundaries.
 
 - Session expiry enforced server-side
 
-##🧠 Architecture Overview
-##Tech Stack
+## 🧠 Architecture Overview
+### Tech Stack
 
 | Layer      | Technology              |
 | ---------- | ----------------------- |
@@ -123,7 +123,7 @@ UI restrictions are not trusted as security boundaries.
 | Auth       | Custom server-side auth |
 | Deployment | Vercel                  |
 
-##🗂️ Project Structure
+## 🗂️ Project Structure
 
 ```bash
 veritas-website/
@@ -167,8 +167,8 @@ veritas-website/
 └─ README.md
 ```
 
-##🗄️ Database Design (High Level)
-##Key Models
+## Z Database Design (High Level)
+### Key Models
 
 - AdminUser
 - AdminSession
@@ -177,15 +177,15 @@ veritas-website/
 - TeamMember
 - VSDEntry
 
-##Design Choices
+### Design Choices
 
 - Foreign keys for referential integrity
 - Ordered lists for team members & VSD
 - Explicit approval flags for admins
 - No soft deletes for admins (explicit removal)
 
-##🧾 Events System
-##Admin Capabilities
+## 🧾 Events System
+### Admin Capabilities
 
 - Create, edit, delete events
 - Set status: Upcoming / Live / Completed
@@ -196,8 +196,8 @@ veritas-website/
 - Full event details page
 - Conditional CTAs (registration / links)
 
-##👥 Team Management
-##Structure
+## 👥 Team Management
+### Structure
 
 - Departments (e.g., Events, Research)
 - One HOD per department
@@ -211,7 +211,7 @@ veritas-website/
 - Members ordered and grouped
 - Dedicated member profile page
 
-##🗞️ Veritas Speaking Digest (VSD)
+## 🗞️ Veritas Speaking Digest (VSD)
 
 - Editorial content module
 - Managed by Content Admin & Super Admin
@@ -219,23 +219,23 @@ veritas-website/
 - Editable title, description, links, images
 - Public read-only display
 
-##🔄 Revalidation & Deployment
-##Revalidation Strategy
+## 🔄 Revalidation & Deployment
+### Revalidation Strategy
 
 - Pages are statically rendered where possible
 - Admin mutations trigger revalidation
 - Public pages update immediately after publish
 
-##Deployment
+### Deployment
 - Hosted on Vercel
 
-##🎯 Design Philosophy
+## 🎯 Design Philosophy
 
 - Backend is the source of truth
 - Permissions enforced server-side
 - UI never trusted for authorization
 
-##📌 Future Enhancements
+## 📌 Future Enhancements
 
 - Password reset flow
 - Audit logs for admin actions
@@ -243,7 +243,7 @@ veritas-website/
 - Email notifications
 - Analytics dashboard
 
-##📄 License
+## 📄 License
 
 Internal project for Veritas Society.
 Educational and organizational use only.
