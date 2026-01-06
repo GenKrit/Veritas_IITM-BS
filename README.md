@@ -4,6 +4,9 @@ A full-stack, role-based web platform built for Veritas Society, designed to man
 
 This project focuses on real-world system design, secure authentication, role-based authorization, and scalable content management, rather than demo-only features.
 
+### Note: Used GSAP and Framer motion for UI styling.
+
+
 ## 🌐 Overview
 
 Veritas Society is a discussion- and discourse-focused academic society.
