@@ -1,3 +1,325 @@
+# Veritas Society – Web Platform
+
+A full-stack, role-based web platform built for Veritas Society, designed to manage events, team members, editorial content, and internal administration with strong access control and clean separation between public and admin features.
+
+This project focuses on real-world system design, secure authentication, role-based authorization, and scalable content management, rather than demo-only features.
+
+🌐 Overview
+
+Veritas Society is a discussion- and discourse-focused academic society.
+This platform serves two purposes:
+
+Public Website
+
+Showcase events, team members, and Veritas Speaking Digest (VSD)
+
+Read-only, SEO-friendly, and fast
+
+Admin Panel
+
+Manage events, team structure, and editorial content
+
+Role-based access with approval workflow
+
+Secure, server-validated actions
+
+✨ Core Features
+Public Side
+
+Public Events listing with full event details
+
+Public Team page (department-wise, HOD highlighted)
+
+Public Veritas Speaking Digest (VSD)
+
+Server-rendered pages for fast load & SEO
+
+Automatic revalidation after admin updates
+
+Admin Side
+
+Secure admin authentication
+
+Role-based access control
+
+Admin approval workflow
+
+Event creation, editing, publishing
+
+Team management by department
+
+VSD content management
+
+Protected API routes (server-side permission checks)
+
+👥 Admin Roles & Permissions
+
+The system uses strict role-based authorization, enforced on the server, not the UI.
+
+Roles
+🛡️ SUPER_ADMIN
+
+Full system access
+
+Create, approve, remove admins
+
+Assign and change admin roles
+
+Manage all events, teams, and content
+
+Override permissions where required
+
+🏢 DEPARTMENT_ADMIN
+
+Manage events
+
+Manage team members for assigned departments
+
+Cannot manage admins
+
+✍️ CONTENT_ADMIN
+
+Manage Veritas Speaking Digest (VSD)
+
+Manage editorial content
+
+Limited event access (content-related only)
+
+⚠️ Permissions are enforced in backend APIs.
+UI restrictions are not trusted as security boundaries.
+
+🔐 Authentication & Security Design
+
+Server-side session authentication (cookie-based)
+
+Passwords stored using bcrypt hashing
+
+No JWTs or client-trusted tokens
+
+Admin approval required before login
+
+Self-role modification is prevented
+
+Founder / Super Admin protections enforced
+
+Login Rules
+
+Admin account must exist
+
+Admin must be approved
+
+Password must match bcrypt hash
+
+Session expiry enforced server-side
+
+🧠 Architecture Overview
+Tech Stack
+Layer	Technology
+Framework	Next.js (App Router)
+Language	TypeScript
+Database	PostgreSQL
+ORM	Prisma
+Styling	Tailwind CSS
+Auth	Custom server-side auth
+Deployment	Vercel
+🗂️ Project Structure
+veritas-website/
+├─ app/
+│  ├─ (public)/              # Public pages
+│  │  ├─ page.tsx
+│  │  ├─ events/
+│  │  ├─ team/
+│  │  └─ vsd/
+│  │
+│  ├─ admin/
+│  │  ├─ (protected)/
+│  │  │  ├─ dashboard/
+│  │  │  ├─ events/
+│  │  │  ├─ team/
+│  │  │  ├─ vsd/
+│  │  │  └─ admins/
+│  │  └─ login/
+│  │
+│  └─ api/
+│     └─ admin/
+│        ├─ auth/
+│        ├─ events/
+│        ├─ admins/
+│        ├─ team/
+│        └─ vsd/
+│
+├─ lib/
+│  ├─ auth/
+│  │  ├─ admin.ts
+│  │  ├─ permissions.ts
+│  │  ├─ session.ts
+│  │
+│  ├─ events/
+│  ├─ team/
+│  └─ vsd/
+│
+├─ prisma/
+│  └─ schema.prisma
+│
+└─ README.md
+
+🗄️ Database Design (High Level)
+Key Models
+
+AdminUser
+
+AdminSession
+
+Event
+
+TeamDepartment
+
+TeamMember
+
+VSDEntry
+
+Design Choices
+
+Foreign keys for referential integrity
+
+Ordered lists for team members & VSD
+
+Explicit approval flags for admins
+
+No soft deletes for admins (explicit removal)
+
+🧾 Events System
+Admin Capabilities
+
+Create, edit, delete events
+
+Set status: Upcoming / Live / Completed
+
+Add registration links, documents, cover images
+
+Publish immediately
+
+Public Side
+
+All active events are visible
+
+Full event details page
+
+Conditional CTAs (registration / links)
+
+👥 Team Management
+Structure
+
+Departments (e.g., Events, Research)
+
+One HOD per department
+
+Multiple team members with ordering
+
+Admin Flow
+
+Department Admin / Super Admin can edit
+
+Edit mode required to modify
+
+Save & Publish updates immediately reflect on public site
+
+Public Display
+
+HOD highlighted
+
+Members ordered and grouped
+
+Dedicated member profile page
+
+🗞️ Veritas Speaking Digest (VSD)
+
+Editorial content module
+
+Managed by Content Admin & Super Admin
+
+Ordered entries
+
+Editable title, description, links, images
+
+Public read-only display
+
+🔄 Revalidation & Deployment
+Revalidation Strategy
+
+Pages are statically rendered where possible
+
+Admin mutations trigger revalidation
+
+Public pages update immediately after publish
+
+Deployment
+
+Hosted on Vercel
+
+Environment variables managed via Vercel dashboard
+
+Database hosted externally (PostgreSQL)
+
+Required Environment Variables
+DATABASE_URL=
+SESSION_SECRET=
+
+
+⚠️ .env files are intentionally excluded from version control.
+
+🚀 Running Locally
+git clone <repo-url>
+cd veritas-website
+npm install
+
+
+Set environment variables:
+
+DATABASE_URL=postgres://...
+SESSION_SECRET=...
+
+
+Run migrations:
+
+npx prisma migrate dev
+
+
+Start dev server:
+
+npm run dev
+
+🎯 Design Philosophy
+
+Backend is the source of truth
+
+Permissions enforced server-side
+
+UI never trusted for authorization
+
+Simple flows > over-engineered abstractions
+
+Build what is needed, extensible where necessary
+
+📌 Future Enhancements
+
+Password reset flow
+
+Audit logs for admin actions
+
+Rate limiting on auth routes
+
+Email notifications
+
+Analytics dashboard
+
+📄 License
+
+Internal project for Veritas Society.
+Educational and organizational use only.
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
