@@ -246,6 +246,17 @@ veritas-website/
 - Email notifications
 - Analytics dashboard
 
+## Upcoming Updates
+```text
+- Past Session Members 
+- Wall of hnour
+- Content page
+     -- Articles/Published
+     -- Blogs
+     -- Term End Magazine
+- Verify at Veritas
+```
+
 ## 📄 License
 
 Internal project for Veritas Society.
@@ -268,6 +279,9 @@ pnpm dev
 # or
 bun dev
 ```
+
+
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
